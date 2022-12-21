@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>emptyTable.png</file>
+        <file>fillTable.png</file>
+    </qresource>
+</RCC>
