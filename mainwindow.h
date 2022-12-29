@@ -14,13 +14,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    Ui::MainWindow *ui;
 
 private slots:
     void on_addCustomer_clicked();
 
+
 private:
-    Ui::MainWindow *ui;
     void initTableList();
+    void tableListClick(int row);
 };
 
 #endif // MAINWINDOW_H

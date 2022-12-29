@@ -10,15 +10,18 @@ CONFIG += c++17
 
 SOURCES += \
     addcustomerdialog.cpp \
+    filltabledialog.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     addcustomerdialog.h \
+    filltabledialog.h \
     mainwindow.h
 
 FORMS += \
     addcustomerdialog.ui \
+    filltabledialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
