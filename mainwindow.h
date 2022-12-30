@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSqlDatabase>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +24,11 @@ private slots:
 private:
     void initTableList();
     void tableListClick(int row);
+    bool OpenDatabase();
+    void CloseDatabase();
+    bool LoadTableList();
+    void waitingList();
+    QSqlDatabase m_db;
 };
 
 #endif // MAINWINDOW_H

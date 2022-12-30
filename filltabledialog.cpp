@@ -1,6 +1,7 @@
 #include "filltabledialog.h"
 #include "qpushbutton.h"
 #include "ui_filltabledialog.h"
+#include <QDebug>
 
 fillTableDialog::fillTableDialog(QWidget *parent) :
     QDialog(parent),
@@ -10,6 +11,12 @@ fillTableDialog::fillTableDialog(QWidget *parent) :
 
 }
 
+struct Customer{
+    int id;
+    int numOfPeople;
+    QString name;
+};
+
 fillTableDialog::~fillTableDialog()
 {
     delete ui;
@@ -17,26 +24,22 @@ fillTableDialog::~fillTableDialog()
 
 void fillTableDialog::initTableList(){
     QStringList headers;
-    headers << "Name" << "Capacity"<< "Action";
+    headers << "Name" << "Number of People"<< "Action";
     ui->tableWidget->setColumnCount(headers.length());
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->tableWidget->setColumnWidth(1, 200);
 
 
     for(int i=0; i < waitinglist.length(); i++){
 
-        QString str = waitinglist.value(i);
-
-
-        QStringList values = str.split("\n");
-        QString name = values.value(0).split(":").value(1).trimmed();
-        QString num = values.value(1).split(":").value(1).trimmed();
+        struct Customer cs = waitinglist.value(i);
 
         int nRowCount = ui->tableWidget->rowCount();
 
         ui->tableWidget->setRowCount(nRowCount+1);
-        ui->tableWidget->setItem(nRowCount, 0, new QTableWidgetItem(name));
-        ui->tableWidget->setItem(nRowCount, 1, new QTableWidgetItem(num));
+        ui->tableWidget->setItem(nRowCount, 0, new QTableWidgetItem(cs.name));
+        ui->tableWidget->setItem(nRowCount, 1, new QTableWidgetItem(QString::number(cs.numOfPeople)));
         ui->tableWidget->item(nRowCount, 0)->setFlags(Qt::ItemIsEditable);
         ui->tableWidget->item(nRowCount, 1)->setFlags(Qt::ItemIsEditable);
         QPushButton *action_btn = new QPushButton();
@@ -47,7 +50,7 @@ void fillTableDialog::initTableList(){
 
 }
 
-void fillTableDialog::setWaitingList(const QStringList list){
+void fillTableDialog::setWaitingList(const QList<struct Customer> list){
     qDebug() << list.length();
     waitinglist = list;
     initTableList();

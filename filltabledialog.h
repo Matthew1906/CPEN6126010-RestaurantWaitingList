@@ -14,7 +14,7 @@ class fillTableDialog : public QDialog
 public:
     explicit fillTableDialog(QWidget *parent = nullptr);
     ~fillTableDialog();
-    void setWaitingList(const QStringList list);
+    void setWaitingList(const QList<struct Customer> list);
     void setRequestedNum(int num);
 
 private slots:
@@ -22,7 +22,7 @@ private slots:
 
 private:
     Ui::fillTableDialog *ui;
-    QStringList waitinglist;
+    QList<struct Customer> waitinglist;
     int requestNum;
     void initTableList();
 };
