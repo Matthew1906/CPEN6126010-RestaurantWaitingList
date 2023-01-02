@@ -23,10 +23,10 @@ private slots:
 
 private:
     void initTableList();
-    void tableListClick(int row);
-    bool OpenDatabase();
-    void CloseDatabase();
-    bool LoadTableList();
+    void tableListClick();
+    bool openDatabase();
+    void closeDatabase();
+    bool loadTableList();
     void waitingList();
     QSqlDatabase m_db;
 };

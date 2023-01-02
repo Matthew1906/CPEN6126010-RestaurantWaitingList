@@ -6,6 +6,8 @@ AddCustomerDialog::AddCustomerDialog(QWidget *parent) :
     ui(new Ui::AddCustomerDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Add New Customer");
+    this->setWindowIcon(QIcon(":/icons/customerIcon.png"));
 }
 
 AddCustomerDialog::~AddCustomerDialog()

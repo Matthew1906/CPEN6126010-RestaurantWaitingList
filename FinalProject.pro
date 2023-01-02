@@ -16,6 +16,7 @@ SOURCES += \
 
 HEADERS += \
     addcustomerdialog.h \
+    customer.h \
     filltabledialog.h \
     mainwindow.h
 

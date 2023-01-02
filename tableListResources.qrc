@@ -2,5 +2,8 @@
     <qresource prefix="/icons">
         <file>emptyTable.png</file>
         <file>fillTable.png</file>
+        <file>reservationIcon.png</file>
+        <file>customerIcon.png</file>
+        <file>eatIcon.png</file>
     </qresource>
 </RCC>

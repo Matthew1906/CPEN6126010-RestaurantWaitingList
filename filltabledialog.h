@@ -15,16 +15,15 @@ public:
     explicit fillTableDialog(QWidget *parent = nullptr);
     ~fillTableDialog();
     void setWaitingList(const QList<struct Customer> list);
-    void setRequestedNum(int num);
+    int toAdd;
 
 private slots:
-    void on_tableWidget_cellClicked(int row, int column);
 
 private:
     Ui::fillTableDialog *ui;
     QList<struct Customer> waitinglist;
-    int requestNum;
     void initTableList();
+    void setChoice();
 };
 
 #endif // FILLTABLEDIALOG_H
