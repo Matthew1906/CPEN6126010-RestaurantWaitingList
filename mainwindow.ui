@@ -78,9 +78,69 @@
      <height>42</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuHistory">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout_Us"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit </string>
+    </property>
+    <addaction name="actionAdd_Customer"/>
+    <addaction name="actionTable_History"/>
+   </widget>
+   <addaction name="menuHistory"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbout_Us">
+   <property name="icon">
+    <iconset resource="tableListResources.qrc">
+     <normaloff>:/icons/aboutIcon.png</normaloff>:/icons/aboutIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Us</string>
+   </property>
+  </action>
+  <action name="actionAdd_Customer">
+   <property name="icon">
+    <iconset resource="tableListResources.qrc">
+     <normaloff>:/icons/customerIcon.png</normaloff>:/icons/customerIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Customer</string>
+   </property>
+  </action>
+  <action name="actionTable_History">
+   <property name="icon">
+    <iconset resource="tableListResources.qrc">
+     <normaloff>:/icons/historyIcon.png</normaloff>:/icons/historyIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Table History</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="tableListResources.qrc">
+     <normaloff>:/icons/exitIcon.png</normaloff>:/icons/exitIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="tableListResources.qrc"/>
+ </resources>
  <connections/>
 </ui>

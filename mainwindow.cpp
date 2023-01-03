@@ -1,6 +1,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QDialog>
+#include <QMessageBox>
 #include <QSqlError>
 #include <QSqlQuery>
 #include "customer.h"
@@ -19,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowIcon(QIcon(":/icons/reservationIcon.png"));
     initTableList();
     openDatabase();
+    connect(ui->actionAdd_Customer, &QAction::triggered, this, &MainWindow::addCustomer);
+    connect(ui->addCustomer, &QPushButton::clicked, this, &MainWindow::addCustomer);
 }
 
 MainWindow::~MainWindow()
@@ -73,9 +76,9 @@ bool MainWindow::loadTableList()
         ui->tableList->item(nRowCount, 0)->setFlags(Qt::ItemIsEditable);
         ui->tableList->item(nRowCount, 1)->setFlags(Qt::ItemIsEditable);
         ui->tableList->item(nRowCount, 2)->setFlags(Qt::ItemIsEditable);
-        ui->tableList->item(nRowCount, 0)->setTextAlignment( Qt::AlignCenter );
-        ui->tableList->item(nRowCount, 1)->setTextAlignment( Qt::AlignCenter );
-        ui->tableList->item(nRowCount, 2)->setTextAlignment( Qt::AlignCenter );
+        ui->tableList->item(nRowCount, 0)->setTextAlignment(Qt::AlignCenter);
+        ui->tableList->item(nRowCount, 1)->setTextAlignment(Qt::AlignCenter);
+        ui->tableList->item(nRowCount, 2)->setTextAlignment(Qt::AlignCenter);
         QPushButton* action_btn = new QPushButton();
         QObject::connect(action_btn, &QPushButton::clicked, this, [this]{tableListClick();});
         action_btn->setIcon(QIcon(stat ? ":/icons/emptyTable.png" : ":/icons/fillTable.png"));
@@ -109,7 +112,7 @@ void MainWindow::waitingList()
     }
 }
 
-void MainWindow::on_addCustomer_clicked()
+void MainWindow::addCustomer()
 {
     // Add new customer to the list
     AddCustomerDialog add;
@@ -140,13 +143,14 @@ void MainWindow::tableListClick()
         fillTableDialog ft;
         QList <struct Customer> cust;
         int capacity = ui->tableList->item(ui->tableList->currentRow(),1)->text().toInt();
-        QSqlQuery qry("SELECT ID, name, numOfPeople FROM Customer WHERE Table_ID IS NULL AND numOfPeople <= " + QString::number(capacity),m_db);
+        QSqlQuery qry("SELECT ID, name, numOfPeople, timestamp FROM Customer WHERE Table_ID IS NULL AND numOfPeople <= " + QString::number(capacity),m_db);
         while (qry.next())
         {
             int id = qry.value("id").toInt();
             QString name  = qry.value("name").toString();
             int numOfPeople = qry.value("numOfPeople").toInt();
-            struct Customer cs = {id,numOfPeople,name};
+            QString timestamp = qry.value("timestamp").toString();
+            struct Customer cs = {id,numOfPeople,name, timestamp};
             cust.append(cs);
         }
         ft.setWaitingList(cust);
@@ -186,4 +190,33 @@ void MainWindow::tableListClick()
         }
         loadTableList();
     }
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    closeDatabase();
+    close();
+}
+
+void MainWindow::on_actionTable_History_triggered()
+{
+    qDebug()<<"Table History";
+}
+
+void MainWindow::on_actionAbout_Us_triggered()
+{
+    QMessageBox messageBox;
+    messageBox.setWindowTitle("About this app");
+    messageBox.setWindowIcon(QIcon(":/icons/aboutIcon.png"));
+    messageBox.setIcon(QMessageBox::Information);
+    messageBox.setText("<strong>CPEN6126010 - Cross Platform Application Development Final Project</strong>");
+    messageBox.setInformativeText(
+        "A Restaurant Waiting List Desktop Application to assist the receptionist "
+        "in assigning tables and keeping track of customers.\n"
+        "\nMade by:\n"
+        "• 2440007062 - Gian Reinfred Athevan\n"
+        "• 2440009162 - Matthew Adrianus Mulyono\n"
+        "• 2440016262 - Valencia Vananda\n"
+    );
+    messageBox.exec();
 }

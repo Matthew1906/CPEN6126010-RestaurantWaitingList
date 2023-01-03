@@ -7,7 +7,7 @@ struct Customer
 {
     int id;
     int numOfPeople;
-    QString name;
+    QString name, timestamp;
 };
 
 #endif // CUSTOMER_H

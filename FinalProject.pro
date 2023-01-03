@@ -12,18 +12,21 @@ SOURCES += \
     addcustomerdialog.cpp \
     filltabledialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tablehistorydialog.cpp
 
 HEADERS += \
     addcustomerdialog.h \
     customer.h \
     filltabledialog.h \
-    mainwindow.h
+    mainwindow.h \
+    tablehistorydialog.h
 
 FORMS += \
     addcustomerdialog.ui \
     filltabledialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    tablehistorydialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -18,17 +18,19 @@ public:
     Ui::MainWindow *ui;
 
 private slots:
-    void on_addCustomer_clicked();
-
+    void on_actionExit_triggered();
+    void on_actionTable_History_triggered();
+    void on_actionAbout_Us_triggered();
 
 private:
-    void initTableList();
-    void tableListClick();
+    QSqlDatabase m_db;
     bool openDatabase();
     void closeDatabase();
+    void initTableList();
     bool loadTableList();
+    void tableListClick();
     void waitingList();
-    QSqlDatabase m_db;
+    void addCustomer();
 };
 
 #endif // MAINWINDOW_H

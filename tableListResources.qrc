@@ -5,5 +5,8 @@
         <file>reservationIcon.png</file>
         <file>customerIcon.png</file>
         <file>eatIcon.png</file>
+        <file>aboutIcon.png</file>
+        <file>exitIcon.png</file>
+        <file>historyIcon.png</file>
     </qresource>
 </RCC>

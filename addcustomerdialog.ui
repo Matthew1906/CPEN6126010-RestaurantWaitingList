@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -58,7 +58,14 @@ text-align:center;</string>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="numPeople_input"/>
+       <widget class="QSpinBox" name="numPeople_input">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>10</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
