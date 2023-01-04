@@ -10,6 +10,7 @@
 #include "addcustomerdialog.h"
 #include "ui_addcustomerdialog.h"
 #include "filltabledialog.h"
+#include "tablehistorydialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -158,8 +159,9 @@ void MainWindow::tableListClick()
         {
             int customerId = ft.toAdd;
             QSqlQuery qry(m_db);
-            qry.prepare("UPDATE Customer SET Table_ID=:tableId WHERE ID=:customerId");
+            qry.prepare("UPDATE Customer SET Table_ID=:tableId, timestamp=:timestamp WHERE ID=:customerId");
             qry.bindValue(":tableId", ui->tableList->item(ui->tableList->currentRow(), 0)->text().toInt());
+            qry.bindValue(":timestamp", QDateTime::currentDateTime().toString());
             qry.bindValue(":customerId", customerId);
             bool fResult = qry.exec();
             if (!fResult)
@@ -201,6 +203,20 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionTable_History_triggered()
 {
     qDebug()<<"Table History";
+    TableHistoryDialog ft;
+    QList <struct Customer> cust;
+    QSqlQuery qry("SELECT ID, name, numOfPeople, timestamp FROM Customer WHERE Table_ID IS NOT NULL", m_db);
+    while (qry.next())
+    {
+        int id = qry.value("id").toInt();
+        QString name  = qry.value("name").toString();
+        int numOfPeople = qry.value("numOfPeople").toInt();
+        QString timestamp = qry.value("timestamp").toString();
+        struct Customer cs = {id,numOfPeople,name, timestamp};
+        cust.append(cs);
+    }
+    ft.setHistory(cust);
+    ft.exec();
 }
 
 void MainWindow::on_actionAbout_Us_triggered()

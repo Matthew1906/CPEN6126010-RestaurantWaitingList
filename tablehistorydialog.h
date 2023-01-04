@@ -14,9 +14,12 @@ class TableHistoryDialog : public QDialog
 public:
     explicit TableHistoryDialog(QWidget *parent = nullptr);
     ~TableHistoryDialog();
+    void setHistory(const QList<struct Customer> list);
 
 private:
     Ui::TableHistoryDialog *ui;
+    QList<struct Customer> histories;
+    void initHistory();
 };
 
 #endif // TABLEHISTORYDIALOG_H
