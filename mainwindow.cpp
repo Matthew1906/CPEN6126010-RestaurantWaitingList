@@ -202,10 +202,9 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionTable_History_triggered()
 {
-    qDebug()<<"Table History";
     TableHistoryDialog ft;
     QList <struct Customer> cust;
-    QSqlQuery qry("SELECT ID, name, numOfPeople, timestamp FROM Customer WHERE Table_ID IS NOT NULL", m_db);
+    QSqlQuery qry("SELECT ID, name, numOfPeople, timestamp FROM Customer WHERE Table_ID IS NOT NULL ORDER BY Timestamp DESC", m_db);
     while (qry.next())
     {
         int id = qry.value("id").toInt();
